@@ -1,3 +1,4 @@
+/* Your existing CSS styles */
 * {
     margin: 0;
     padding: 0;
@@ -11,14 +12,15 @@
 }
 
 .sidebar-icons {
- width: 20px;
+    width: 20px;
 }
 
 .sidebar-icons-shape {
     width: 12px;
-    border: 1px  solid #060606;
+    border: 1px solid #060606;
 }
 
+/* Additional CSS styles */
 .sidebar {
     position: absolute;
     top: 0;
@@ -30,9 +32,9 @@
     transition: all 0.5s ease;
 }
 
-.sidebar.active ~ .main-content{
+.sidebar.active ~ .main-content {
     left: 250px;
-    width:  calc(100% - 250px);
+    width: calc(100% - 250px);
 }
 
 .sidebar.active {
@@ -43,9 +45,9 @@
     position: absolute;
     color: #fff;
     top: .4rem;
-    left:  50%;
-    font-size:  1.2 rem;
-    line-height:  50px;
+    left: 50%;
+    font-size: 1.2rem;
+    line-height: 50px;
     transform: translateX(-50%);
     cursor: pointer;
 }
@@ -60,11 +62,11 @@
     height: 50px;
     width: 100%;
     align-items: center;
-    pointer-events:  none;
+    pointer-events: none;
     opacity: 0;
 }
 
-.sidebar.active .top .logo{
+.sidebar.active .top .logo {
     opacity: 1;
 }
 
@@ -73,8 +75,56 @@
     margin-right: 5px;
 }
 
+.user {
+    display: flex;
+    align-items: center;
+    margin: 1rem;
+}
+
 .user p {
     color: #eee;
     opacity: 1;
     margin-left: 1rem;
+}
+
+.bold {
+    font-weight: 600;
+}
+
+.sidebar p {
+    opacity: 0;
+}
+
+.sidebar.active p {
+    opacity: 1;
+}
+
+.sidebar ul li {
+    position: relative;
+    list-style: none;
+    height: 50px;
+    width: 90%;
+    margin: 0.8rem auto;
+    line-height: 50px;
+}
+
+.sidebar ul li a {
+    color: #fff;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 0.8rem;
+}
+
+.sidebar ul li a:hover {
+    background-color: #fff;
+    color: #12171e;
+}
+
+.sidebar ul li a i {
+    min-width: 50px;
+    text-align: center;
+    height: 50px;
+    border-radius: 12px;
+    line-height: 50px;
 }
