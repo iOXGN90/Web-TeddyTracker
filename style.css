@@ -1,4 +1,106 @@
-/* Your existing CSS styles */
+*{
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    /* colors */
+    --body-color: #E4E9F7;
+    --sidebar-color: #FFF;
+    --primary-color: #feef4c;
+    --toggle-color: #DDD;
+    --text-color: #707070;
+
+    /* transition */
+    --tran-03: all 0.2s ease;
+    --tran-03: all 0.3s ease;
+    --tran-04: all 0.4s ease;
+    --tran-05: all 0.5s ease;
+}
+
+body{
+    height: 100vh;
+    background: var(--body-color);
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 250px;
+    background: var(--sidebar-color);
+}
+
+.sidebar .logo{
+    width: 40px;
+    border-radius: 6px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Your existing CSS styles
 * {
     margin: 0;
     padding: 0;
@@ -20,7 +122,11 @@
     border: 1px solid #060606;
 }
 
-/* Additional CSS styles */
+img.folder {
+    filter: brightness(0) invert(1) grayscale(1);
+}
+
+/* Additional CSS styles 
 .sidebar {
     position: absolute;
     top: 0;
@@ -70,7 +176,7 @@
     opacity: 1;
 }
 
-.top .logo i {
+.top .logo .i {
     font-size: 2rem;
     margin-right: 5px;
 }
@@ -128,3 +234,11 @@
     border-radius: 12px;
     line-height: 50px;
 }
+
+.sidebar .nav-item {
+    opacity: 0;
+}
+
+.sidebar.active .nav-item {
+    opacity: 1;
+} 
