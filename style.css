@@ -14,7 +14,7 @@
     --text-color: #707070;
 
     /* transition */
-    --tran-03: all 0.2s ease;
+    --tran-02: all 0.2s ease;
     --tran-03: all 0.3s ease;
     --tran-04: all 0.4s ease;
     --tran-05: all 0.5s ease;
@@ -25,220 +25,131 @@ body{
     background: var(--body-color);
 }
 
-.sidebar {
+
+
+/* side bar */
+
+.sidebar{
     position: fixed;
     top: 0;
     left: 0;
     height: 100%;
     width: 250px;
     background: var(--sidebar-color);
+    padding:  10px 14px;
 }
 
+/*  reuseable sidebar css */
+
+.sidebar .image-text{
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.sidebar .image{
+    min-width: 60px;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar li{
+    height: 50px;
+    margin-top: 10px;
+    list-style: none;
+    display: flex;
+    align-items: center;
+
+}
+
+.sidebar li .icon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 60px;
+    font-size: 20px;   
+}
+
+.sidebar li .icon,
+.sidebar li .text{
+    color: var(--text-color);
+    transition: var(--tran-03);
+}
+
+.sidebar header{
+    position: relative;
+}
 .sidebar .logo{
     width: 40px;
     border-radius: 6px;
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Your existing CSS styles
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-.user-img {
-    width: 50px;
-    border-radius: 100%;
-    border: 1px solid #eee;
-}
-
-.sidebar-icons {
-    width: 20px;
-}
-
-.sidebar-icons-shape {
-    width: 12px;
-    border: 1px solid #060606;
-}
-
-img.folder {
-    filter: brightness(0) invert(1) grayscale(1);
-}
-
-/* Additional CSS styles 
-.sidebar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 80px;
-    background-color: #12171e;
-    padding: 0.4rem 0.8rem;
-    transition: all 0.5s ease;
-}
-
-.sidebar.active ~ .main-content {
-    left: 250px;
-    width: calc(100% - 250px);
-}
-
-.sidebar.active {
-    width: 250px;
-}
-
-.sidebar #btn {
-    position: absolute;
-    color: #fff;
-    top: .4rem;
-    left: 50%;
-    font-size: 1.2rem;
-    line-height: 50px;
-    transform: translateX(-50%);
-    cursor: pointer;
-}
-
-.sidebar.active #btn {
-    left: 90%;
-}
-
-.sidebar .top .logo {
-    color: #fff;
-    display: flex;
-    height: 50px;
-    width: 100%;
-    align-items: center;
-    pointer-events: none;
-    opacity: 0;
-}
-
-.sidebar.active .top .logo {
-    opacity: 1;
-}
-
-.top .logo .i {
-    font-size: 2rem;
-    margin-right: 5px;
-}
-
-.user {
+.sidebar header .image-text{
     display: flex;
     align-items: center;
-    margin: 1rem;
+
 }
 
-.user p {
-    color: #eee;
-    opacity: 1;
-    margin-left: 1rem;
+header .image-text .header-text{
+    display: flex;
+    align-items: center;
+}
+.header-text .profession{
+    margin-top: -2px;
 }
 
-.bold {
-    font-weight: 600;
+.sidebar header .toggle{
+    position: absolute;
+    top: 50%;
+    right: -25px;
+    transform: translateY(-50%);
+    height: 25px;
+    width: 25px;
+    background: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: var(--sidebar-color);
+    font-size: 22px;
 }
 
-.sidebar p {
-    opacity: 0;
-}
-
-.sidebar.active p {
-    opacity: 1;
-}
-
-.sidebar ul li {
-    position: relative;
-    list-style: none;
-    height: 50px;
-    width: 90%;
-    margin: 0.8rem auto;
-    line-height: 50px;
-}
-
-.sidebar ul li a {
-    color: #fff;
+.sidebar li a{
+    height: 100%;
     display: flex;
     align-items: center;
     text-decoration: none;
-    border-radius: 0.8rem;
 }
 
-.sidebar ul li a:hover {
-    background-color: #fff;
-    color: #12171e;
+.sidebar .search-box{
+    background: #fffabd;
 }
 
-.sidebar ul li a i {
-    min-width: 50px;
-    text-align: center;
-    height: 50px;
-    border-radius: 12px;
-    line-height: 50px;
+.search-box input{
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: none;
+    border-radius: 6px;
+    background: var(--primary-color-light);
 }
 
-.sidebar .nav-item {
-    opacity: 0;
+.sidebar li a{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: var(--tran-04);
 }
 
-.sidebar.active .nav-item {
-    opacity: 1;
-} 
+.sidebar li a:hover{
+    background: var(--primary-color);
+}
+
+.sidebar li a:hover .icon,
+.sidebar li a:hover .text{
+    color: var(--sidebar-color);
+}
+
