@@ -25,7 +25,11 @@ body{
     background: var(--body-color);
 }
 
-
+#red {
+    background-color: red;
+    border-radius: 4px;
+    padding: 5px;
+}
 
 /* side bar */
 
