@@ -10,6 +10,7 @@
     --body-color: #E4E9F7;
     --sidebar-color: #FFF;
     --primary-color: #feef4c;
+    --primary-color-light: #f6f5ff;
     --toggle-color: #DDD;
     --text-color: #707070;
 
@@ -25,6 +26,15 @@ body{
     background: var(--body-color);
 }
 
+body.dark{
+    --body-color: #18191a;
+    --sidebar-color: #242526;
+    --primary-color: #3a3b3c;
+    --primary-color-light: #3a3b3c;
+    --toggle-color: #fff;
+    --text-color: #ccc;
+}
+
 /* side bar */
 
 .sidebar{
@@ -35,9 +45,27 @@ body{
     width: 250px;
     background: var(--sidebar-color);
     padding:  10px 14px;
+    transition: var(--tran-05);
+}
+
+.sidebar.close{
+    width: 90px;
 }
 
 /*  reuseable sidebar css */
+
+.sidebar .text{
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-color);
+    transition: tra;
+    white-space: nowrap;
+    opacity: 1;
+}
+
+.sidebar.close .text{
+    opacity: 0;
+}
 
 .sidebar .image-text{
     font-size: 16px;
@@ -100,7 +128,7 @@ header .image-text .header-text{
     position: absolute;
     top: 50%;
     right: -25px;
-    transform: translateY(-50%);
+    transform: translateY(-50%) rotate(180deg);
     height: 25px;
     width: 25px;
     background: var(--primary-color);
@@ -110,6 +138,17 @@ header .image-text .header-text{
     border-radius: 50%;
     color: var(--sidebar-color);
     font-size: 22px;
+    transition: var(--tran-03);
+}
+
+.sidebar.close header .toggle{
+    transform: translateY(-50%);
+    
+    color: var(--text-color);
+}
+
+body.dark .sidebar header .toggle{
+    color: var(--text-color);
 }
 
 .sidebar li a{
@@ -151,11 +190,22 @@ header .image-text .header-text{
     color: var(--sidebar-color);
 }
 
+body.dark .sidebar li a:hover .icon,
+body.dark .sidebar li a:hover .text{
+    color: var(--text-color);
+}
+
 .sidebar .menu-bar{
     height: calc(100% - 50px);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+
+.menu-bar .mode {
+    position: relative;
+    border-radius: 6px;
+    background: var(--primary-color-light);
 }
 
 .menu-bar .mode .moon-sun{
@@ -174,12 +224,17 @@ header .image-text .header-text{
 }
 
 .menu-bar .mode .toggle-switch{
+    position: absolute;
+    right: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100%;
     min-width: 60px;
-    cursor: poi;
+    cursor: pointer;
+    border-radius: 6px;
+    background: var(--primary-color-light);
+    border-radius: 6px;
 }
 .toggle-switch .switch{
     position: relative;
@@ -197,7 +252,11 @@ header .image-text .header-text{
     border-radius: 50%;
     top: 50%;
     left: 5px;
-    transform: translateY(-50%); /* Use transform instead of transition for vertical centering */
+    transform: translateY(-50%); 
     background: var(--sidebar-color);
+    transition: var(--tran-03);
 }
 
+body.dark .switch::before{
+    left: 24px;
+}
