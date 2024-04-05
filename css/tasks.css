@@ -46,6 +46,7 @@ body.dark{
     background: var(--sidebar-color);
     padding:  10px 14px;
     transition: var(--tran-05);
+    z-index: 100;
 }
 
 .sidebar.close{
@@ -223,6 +224,14 @@ body.dark .sidebar li a:hover .text{
     opacity: 0;
 }
 
+body.dark .menu-bar .mode i.sun{
+    opacity: 1;
+}
+
+body.dark .menu-bar .mode i.moon{
+    opacity: 0;
+}
+
 .menu-bar .mode .toggle-switch{
     position: absolute;
     right: 0;
@@ -259,4 +268,20 @@ body.dark .sidebar li a:hover .text{
 
 body.dark .switch::before{
     left: 24px;
+}
+
+/* Main dashboard sa home */
+
+.home{
+    position: relative;
+    height: 100vh;
+    left: 250px;
+    width: calc(100% - 250px);
+    background: var(--body-color);
+    transition: var(--tran-05);
+}
+
+.sidebar.close ~ .home{
+    left: 88px;
+    width: calc(100% - 88px);
 }
