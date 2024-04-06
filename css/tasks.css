@@ -24,6 +24,7 @@
 body{
     height: 100vh;
     background: var(--body-color);
+    transition: var(--tran-05);
 }
 
 body.dark{
@@ -77,6 +78,7 @@ body.dark{
     min-width: 60px;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .sidebar li{
@@ -150,6 +152,10 @@ header .image-text .header-text{
 
 body.dark .sidebar header .toggle{
     color: var(--text-color);
+}
+
+.sidebar .menu{
+    margin-top: 35px;
 }
 
 .sidebar li a{
@@ -279,6 +285,13 @@ body.dark .switch::before{
     width: calc(100% - 250px);
     background: var(--body-color);
     transition: var(--tran-05);
+}
+
+.home .text{
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--text-color);
+    padding: 8px 40px;
 }
 
 .sidebar.close ~ .home{
