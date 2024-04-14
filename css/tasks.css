@@ -28,8 +28,8 @@
   --tag-1-text:#2e87ba;
   --tag-2:#d6ede2;
   --tag-2-text:#13854e;
-  --tag-3:#ceecfd;
-  --tag-3-text:#2d86ba;
+  --tag-3:#d1fdce;
+  --tag-3-text:#2dba42;
   --tag-4:#f0c2c2;
   --tag-4-text:#ef273b;
   --purple:#7784ee;
@@ -410,7 +410,7 @@ h1 {
   color: var(--tag-4-text);
   background-color: var(--tag-4);
 }
-.task__tag--design {
+.task__tag--finished {
   color: var(--tag-3-text);
   background-color: var(--tag-3);
 }
@@ -505,10 +505,10 @@ h1 {
 .tag-progress .progress--illustration::-webkit-progress-value {
   background-color: #46bd84;
 }
-.tag-progress .progress--design::-webkit-progress-bar {
+.tag-progress .progress--finished::-webkit-progress-bar {
   background-color: #d8e7f4;
 }
-.tag-progress .progress--design::-webkit-progress-value {
+.tag-progress .progress--finished::-webkit-progress-value {
   background-color: #08a0f7;
 }
 
@@ -604,4 +604,41 @@ h1 {
 
 .bx-dots-horizontal-rounded {
   font-size: 30px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  background-color: transparent;
+}
+.bx-dots-horizontal-rounded:hover {
+  border-color: grey;
+  background-color: grey;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdown .dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 200px;
+  padding: 8px;
+  border-radius: 8px;
+  z-index: 1;
+}
+.dropdown .dropdown-content a {
+  display: block;
+  padding: 8px 12px;
+  text-decoration: none;
+  color: black;
+}
+.dropdown .dropdown-content a:hover {
+  background-color: #ddd;
+}
+.dropdown .show {
+  display: block;
+}
+
+.drop {
+  padding-right: 5px;
 }/*# sourceMappingURL=tasks.css.map */

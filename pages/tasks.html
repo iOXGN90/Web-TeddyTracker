@@ -99,9 +99,34 @@
                   <div class='project-column-heading'>
                     <h2 class='project-column-heading__title'>All Tasks</h2><button class='project-column-heading__options'><i class="fas fa-ellipsis-h"></i></button>
                   </div>
+
+                    <div class='task' draggable='true'>
+                        <div class='task__tags'>
+                            <span class='task__tag task__tag--current'>Current Task</span>
+                            <div class="dropdown">
+                                <button class='task__options bx bx-dots-horizontal-rounded' 
+                                onclick="toggleDropdown()"></button>
+                                <div class="dropdown-content" id="dropdownContent">
+                                    <!-- Content of the dropdown goes here -->
+                                    <!-- For example, you can include different options for the user -->
+                                    <a href="#"><i class='bx bx-check icon drop'></i> Mark as done</a>
+                                    <a href="#"><i class='bx bx-trash drop' ></i>Delete</a>
+                                    <a href="#"><i class='bx bx-edit drop' ></i>Edit</a>
+                                </div>
+                            </div>
+                        </div>
+                        <p>Bulbasor</p>
+                        <p>SUBJECT</p>
+                        <div class='task__stats'>
+                            <span><time datetime="2021-11-24T20:00:00"><i class='bx bx-calendar bx-flip-horizontal icon-task' ></i>Nov 24</time></span>
+                        </div>
+                </div>
+
                   <div class='task' draggable='true'>
-                    <div class='task__tags'><span class='task__tag task__tag--current'>Current Task</span><button class='task__options'><i class='bx bx-dots-horizontal-rounded'></i></button></div>
-                    <p>Arlene Cholo</p>
+                    <div class='task__tags'><span class='task__tag task__tag--finished'>Finished Task</span>
+                        <button class='task__options'><i class='bx bx-dots-horizontal-rounded'></i></button></div>
+                    <p>LULbasur</p>
+                    <p>SUBJECT</p>
                     <div class='task__stats'>
                       <span><time datetime="2021-11-24T20:00:00"><i class='bx bx-calendar bx-flip-horizontal icon-task' ></i>Nov 24</time></span>
                     </div>
@@ -110,6 +135,7 @@
                           
                   </div>
               </div>
+              
 
 
             

@@ -30,8 +30,8 @@
     --tag-1-text:#2e87ba;
     --tag-2:#d6ede2;
     --tag-2-text:#13854e;
-    --tag-3:#ceecfd;
-    --tag-3-text:#2d86ba;
+    --tag-3:#d1fdce;
+    --tag-3-text:#2dba42;
     --tag-4:#f0c2c2;
     --tag-4-text:#ef273b;
     --purple:#7784ee;
@@ -387,7 +387,6 @@ h1 {
       &__title {
         font-size:20px;
         margin-left: 2rem;
- 
       }
       &__options {
         background:transparent;
@@ -412,7 +411,7 @@ h1 {
   margin-left: 1rem;
   
   &:hover {
-     box-shadow: rgba(99, 99, 99, 0.3) 0px 2px 8px 0px;
+    box-shadow: rgba(99, 99, 99, 0.3) 0px 2px 8px 0px;
     border-color:rgba(162,179,207,.2)!important;
   }
   
@@ -429,8 +428,8 @@ h1 {
       color:var(--tag-4-text);
       background-color:var(--tag-4);
     }
-    &--design {
-       color:var(--tag-3-text);
+    &--finished {
+      color:var(--tag-3-text);
       background-color:var(--tag-3);
     }
     &--illustration {
@@ -540,7 +539,7 @@ border:3px dashed var(--light-grey)!important;
     }
     }
     
-        &--design {
+        &--finished {
       &::-webkit-progress-bar {
       
       background-color:#d8e7f4;
@@ -599,7 +598,6 @@ border:3px dashed var(--light-grey)!important;
   &--edit {
     background-color:#7784ee;
   }
- 
 }
 
 
@@ -662,6 +660,48 @@ border:3px dashed var(--light-grey)!important;
   margin-right: 5px;
 }
 
-.bx-dots-horizontal-rounded{
+.bx-dots-horizontal-rounded {
   font-size: 30px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  background-color: transparent;
+
+  &:hover {
+    border-color: grey;
+    background-color: grey;
+  }
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 200px;
+    padding: 8px;
+    border-radius: 8px;
+    z-index: 1;
+
+    a {
+      display: block;
+      padding: 8px 12px;
+      text-decoration: none;
+      color: black;
+
+      &:hover {
+        background-color: #ddd;
+      }
+    }
+  }
+
+  .show {
+    display: block;
+  }
+}
+
+.drop{
+  padding-right: 5px;
 }
