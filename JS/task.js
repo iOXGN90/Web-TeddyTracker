@@ -16,12 +16,9 @@ modeSwitch.addEventListener("click", () => {
     }else{
         modeText.innerText = "Dark Mode"
     }
-
-
 });
 
 document.addEventListener('DOMContentLoaded', (event) => {
-
     var dragSrcEl = null;
     
     function handleDragStart(e) {
@@ -74,7 +71,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
       });
     }
     
-    
     let items = document.querySelectorAll('.task'); 
     items.forEach(function(item) {
       item.addEventListener('dragstart', handleDragStart, false);
@@ -84,24 +80,30 @@ document.addEventListener('DOMContentLoaded', (event) => {
       item.addEventListener('drop', handleDrop, false);
       item.addEventListener('dragend', handleDragEnd, false);
     });
-  });
+});
 
+// Button 
 
-  // Button 
-
-  function toggleDropdown() {
-    var dropdownContent = document.getElementById("dropdownContent");
+function toggleDropdown(event) {
+    var dropdownContent = event.target.nextElementSibling;
     dropdownContent.classList.toggle("show");
-  }
+    dropdownContent.style.left = event.target.offsetLeft + "px";
+    dropdownContent.style.top = (event.target.offsetTop + event.target.offsetHeight) + "px";
+}
   
-  window.onclick = function(event) {
+window.onclick = function(event) {
     if (!event.target.matches('.bx-dots-horizontal-rounded')) {
-      var dropdowns = document.getElementsByClassName("dropdown-content");
-      for (var i = 0; i < dropdowns.length; i++) {
-        var openDropdown = dropdowns[i];
-        if (openDropdown.classList.contains('show')) {
-          openDropdown.classList.remove('show');
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        for (var i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+            }
         }
-      }
     }
-  }
+}
+
+const dropdownButtons = document.querySelectorAll('.bx-dots-horizontal-rounded');
+dropdownButtons.forEach(button => {
+    button.addEventListener('click', toggleDropdown);
+});
