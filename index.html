@@ -14,15 +14,33 @@
                     Teddy Tracker
                 </h1>
                 <div class="mode-enter">
-                    <a href="">
+                    <a href="#">
                         Guest Mode
                     </a>
-                    <a href="./pages/login.admin.html">
+                    <a onclick="openPopup()">
                         Admin Mode
                     </a>
+                </div>
+                <div class="popup" id="popup">
+                    <form class="form" action="/login" method="post">
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" required>
+                        <input id="login-button" href="" type="submit" value="Login">
+                    </form>
+                    <button type="button" onclick="closePopup()">Close</button>
                 </div>
                 </a>
             </div>
         </div>
+        <script>
+            let popup = document.getElementById("popup");
+
+            function openPopup(){
+                
+            }
+            function closePopup(){
+
+            }
+        </script>
     </body>
 </html>
