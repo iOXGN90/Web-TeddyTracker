@@ -641,4 +641,8 @@ h1 {
 
 .drop {
   padding-right: 5px;
+}
+
+h1, h2 {
+  color: #808080;
 }/*# sourceMappingURL=tasks.css.map */

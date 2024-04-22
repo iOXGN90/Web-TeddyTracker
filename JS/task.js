@@ -107,3 +107,4 @@ const dropdownButtons = document.querySelectorAll('.bx-dots-horizontal-rounded')
 dropdownButtons.forEach(button => {
     button.addEventListener('click', toggleDropdown);
 });
+
