@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guest</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #EEF5FF;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            position: relative;
+        }
+
+        .content {
+            text-align: center;
+            margin-top: 20%;
+        }
+
+        .textCon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .text {
+            font-size: 50px;
+            color: #403F3F;
+        }
+
+        .text1 {
+            font-size: 50px;
+            color: #55bCF6;
+        }
+
+        .text2 {
+            font-size: 20px;
+            color: #55bCF6;
+        }
+
+        .input {
+            text-align: center;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 15px;
+            margin-bottom: 10px;
+            font-size: 18px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .inputButton {
+            width: 100%;
+            padding: 15px;
+            background-color: #55bCF6;
+            justify-content: center;
+            align-items: center;
+            margin-top: 5px;
+            border-radius: 10px;
+            margin-bottom: 5px;
+        }
+
+        .Btn {
+            font-size: 18px;
+            color: #fff;
+            text-align: center;
+        }
+
+        .button {
+            background-color: #55bCF6;
+            justify-content: center;
+            align-items: center;
+            margin-top: 5px;
+            border-radius: 10px;
+            margin-bottom: 5px;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div>
+            <a href="#" onclick="handleGoBack()">
+                <img src="../../assets/Images/utilities/arrow.png" alt="Go Back" style="margin-top: 10px; width: 25px; height: 25px;">
+            </a>
+        </div>
+        <div class="content">
+            <img src="../../assets/Images/list.png" alt="Logo" class="logo">
+            <div class="textCon">
+                <span class="text">Teddy</span>
+                <span class="text1">Tracker</span>
+            </div>
+            <div>
+                <span class="text2">Guest Mode</span>
+            </div>
+            <div>
+                <input type="text" class="input" placeholder="Section Password" onchange="setPin_password(this.value)">
+                <a onclick="handleLogin()">
+                    <button class="inputButton" >
+                        <span class="Btn">Enter as Guest</span>
+                    </button>
+                    
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function handleGoBack() {
+            // Implementation to navigate back
+        }
+
+        function handleLogin() {
+            var pin_password = document.querySelector('.input').value;
+    
+            // Your axios request here
+            // Example:
+            axios.post('http://192.168.1.6:3000/api/login-section', {
+                pin_password: pin_password
+            })
+            .then(function(response) {
+                var sectionData = {
+                    adminName: response.data.adminName,
+                    sectionID: response.data.sectionID,
+                    adminID: response.data.adminID
+                };
+                const queryString = `?adminName=${sectionData.adminName}&sectionID=${sectionData.sectionID}&adminID=${sectionData.adminID}`;
+                location.href = "/pages/guest.html" + queryString;
+            })
+            .catch(function(error) {
+                if (error.response && error.response.status === 401) {
+                    console.error('Unauthorized:', error.response.data);
+                    alert('Unauthorized: Please check your pin password.');
+                } else {
+                    console.error('Login error:', error);
+                    alert('Login Failed: An error occurred while logging in.');
+                }
+            });
+        }
+
+        function setPin_password(value) {
+            // Implementation to set pin password
+        }
+    </script>
+</body>
+
+</html>

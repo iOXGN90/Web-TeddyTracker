@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Section Guest</title>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  
+  <style>
+    /* Define your CSS styles here */
+    .body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    /* Define other styles as needed */
+  </style>
+</head>
+<body class="body">
+  <div>
+        <div class="display">
+           
+        </div>
+    <button onclick="handleTest()">Task</button>
+  </div>
+  <button onclick="leaveSection()">Leave Section</button>
+  <!-- Render section admin name if available -->
+  <div id="adminName"></div>
+  <!-- Render task list -->
+  <div id="taskList"></div>
+  <script>
+   const displayList = document.querySelector(".display")
+    const displaySubject = document.getElementById("subject");
+    const displayType = document.getElementById("type");
+    const displayStatus = document.getElementById("status");
+    const displayDeadline = document.getElementById("deadline");
+    const displayInstruction = document.getElementById("instruction");
+    function getQueryStringParams() {
+        // Get the query string from the URL
+        const queryString = window.location.search;
+       
+        // Create an object to store data
+        const params = {};
+      
+        // Check if there's a query string
+        if (queryString) {
+          // Remove the leading question mark (?)
+          const queryParams = queryString.substring(1).split('&');
+        
+          for (let i = 0; i < queryParams.length; i++) {
+            const pair = queryParams[i].split('=');
+            // Decode the key and value from URL encoding
+            const key = decodeURIComponent(pair[0]);
+            const value = decodeURIComponent(pair[1]);
+            params[key] = value;
+          }
+        }
+      
+        return params;
+      }
+
+    const data = getQueryStringParams();
+     const sectionId = data.sectionID 
+    const response =  axios.get(`http://192.168.1.6:3000/api/tasks/${sectionId}`)
+      .then(function (response) {
+        // On successful response, display HTML content
+       
+        for(i of response.data.data){
+            console.log(i)
+            const container = document.createElement("div");
+            container.classList.add('container');
+
+            const subjectElement = document.createElement("h6");
+            subjectElement.classList.add('subject');
+            subjectElement.textContent = `Subject: ${i.subject}`;
+
+            const typeElement = document.createElement("h6");
+            typeElement.classList.add('type-of-task');
+            typeElement.textContent = `Type: ${i.type_of_task}`
+
+            const statusElement = document.createElement("h6");
+            statusElement.classList.add('status');
+            statusElement.textContent = `Status: ${i.status}`
+
+            const deadlineElement = document.createElement("h6");
+            deadlineElement.classList.add('deadline');
+            deadlineElement.textContent = `Deadline: ${i.task_deadline}`
+
+
+            const instructionElement = document.createElement("h6");
+            instructionElement.classList.add('instruction');
+            instructionElement.textContent = `Instruction: ${i.task_instruction}`
+          
+            displayList.appendChild(container);
+            container.appendChild(subjectElement);
+            container.appendChild(typeElement);
+            container.appendChild(statusElement);
+            container.appendChild(deadlineElement);
+            container.appendChild(instructionElement);
+
+           
+        }
+      })
+      .catch(function (error) {
+        // On error, log error to console
+        console.error('Error fetching HTML:', error);
+      });
+
+   
+      function handleGuestPage() {
+        // Get the data from the query string
+        const data = getQueryStringParams();
+      
+        // Access the data using key names
+        const adminName = data.adminName;
+        const sectionID = data.sectionID;
+        const adminID = data.adminID;
+      
+        // Use the data here (e.g., display it, populate form fields, etc.)
+        console.log("Welcome, " + adminName + "!" + sectionID + adminID);
+      }
+      
+    // Define handleTest function
+    function handleTest() {
+      console.log("Test button clicked");
+    }
+    // Define leaveSection function
+    function leaveSection() {
+        window.location.href = "/";
+    }
+  </script>
+</body>
+</html>
