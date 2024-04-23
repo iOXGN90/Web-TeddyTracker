@@ -144,7 +144,7 @@
                     adminID: response.data.adminID
                 };
                 const queryString = `?adminName=${sectionData.adminName}&sectionID=${sectionData.sectionID}&adminID=${sectionData.adminID}`;
-                location.href = "/pages/guest.html" + queryString;
+                location.href = "/pages/tasks.html" + queryString;
             })
             .catch(function(error) {
                 if (error.response && error.response.status === 401) {
