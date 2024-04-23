@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teddy Tracker</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../css/tasks.css"> <!-- Replace tasks.scss with tasks.css -->
+</head>
+
+
+<body>
+
+    <nav class="sidebar close">
+        <header>
+            <div class="image-text">
+                <span class="image">
+                    <img src="../img/teddyTracker.jpg" alt="logo" class="logo">
+                </span>
+                <div class="text header-text">
+                    <span class="name"> Teddy Tracker</span>
+                    <!-- <span class="profession">The Best Way to Track Tasks</span> -->
+                </div>
+
+                <i class='bx bx-chevron-right toggle'></i>
+
+            </div>
+        </header>
+
+        <div class="menu-bar">
+            <div class="menu">
+                <ul class="menu-links">
+                    <li class="nav-links">
+                        <a href="tasks.html">
+                            <i class='bx bx-task icon'></i>
+                            <span class="text nav-text">All Tasks</span>
+                        </a>
+                    </li>
+                    <li class="nav-links">
+                        <a href="#">
+                            <i class='bx bx-comment-check icon'></i>
+                            <span class="text nav-text">Finished Tasks</span>
+                        </a>
+                    </li>
+                    <li class="nav-links">
+                        <a href="sections.html">
+                            <i class='bx bx-comment-detail icon'></i>
+                            <span class="text nav-text">Task by Section</span>
+                        </a>
+                    </li>
+                    <li class="nav-links">
+                        <a href="#">
+                            <i class='bx bx-notepad icon'></i>
+                            <span class="text nav-text">Admin Notes</span>
+                        </a>
+                    </li>
+                    <li class="nav-links">
+                        <a href="code.html">
+                            <i class='bx bx-cog icon'></i>
+                            <span class="text nav-text">Enter Code</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bottom-content">
+                <li class="nav-links">
+                    <a href="#">
+                        <i class='bx bx-log-out icon'></i>
+                        <span class="text nav-text">Logout</span>
+                    </a>
+                </li>
+
+                <li class="mode">
+                    <div class="moon-sun">
+                        <i class="bx bx-moon icon moon"></i>
+                        <i class="bx bx-sun icon sun"></i>
+                    </div>
+                    <span class="mode-text text">Dark mode</span>
+
+                    <div class="toggle-switch">
+                        <span class="switch"></span>
+                    </div>
+                </li>
+
+
+            </div>
+
+        </div>
+    </nav>
+
+    <section class="home text menu">
+
+        <!-- <div class="input-container">
+            <input type="text" name="text" class="input" placeholder="Enter Code">
+            <div class="highlight"></div>
+        </div> -->
+
+    </section>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+
+    <script src="../JS/task.js"></script>
+    <script>
+        // Show SweetAlert2 prompt whenever the page is loaded
+
+        Swal.fire({
+    title: "Enter Code",
+    html:
+    '<input id="swal-input1" class="swal2-input" placeholder="Enter Code">',
+    focusConfirm: false,
+    preConfirm: () => {
+    return document.getElementById("swal-input1").value;
+    }
+})
+    .then((result) => {
+    if (result.isConfirmed) {
+      // Handle the entered code here
+    const enteredCode = result.value;
+    console.log("Entered code:", enteredCode);
+    }
+});
+
+    </script>
+
+</body>
+
+</html>

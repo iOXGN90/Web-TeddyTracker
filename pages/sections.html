@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-    <<head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Teddy Tracker</title>
-        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-        <link rel="stylesheet" href="../css/tasks.css"> <!-- Replace tasks.scss with tasks.css -->
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    </head>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teddy Tracker</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../css/tasks.css"> <!-- Replace tasks.scss with tasks.css -->
+</head>
 
 
 <body>
+
     <nav class="sidebar close">
         <header>
             <div class="image-text">
@@ -22,7 +24,7 @@
                     <!-- <span class="profession">The Best Way to Track Tasks</span> -->
                 </div>
 
-                <i class='bx bx-chevron-right toggle' ></i>
+                <i class='bx bx-chevron-right toggle'></i>
 
             </div>
         </header>
@@ -32,7 +34,7 @@
                 <ul class="menu-links">
                     <li class="nav-links">
                         <a href="tasks.html">
-                            <i class='bx bx-task icon' ></i>
+                            <i class='bx bx-task icon'></i>
                             <span class="text nav-text">All Tasks</span>
                         </a>
                     </li>
@@ -50,14 +52,14 @@
                     </li>
                     <li class="nav-links">
                         <a href="#">
-                            <i class='bx bx-notepad icon' ></i>
+                            <i class='bx bx-notepad icon'></i>
                             <span class="text nav-text">Admin Notes</span>
                         </a>
                     </li>
                     <li class="nav-links">
-                        <a href="#">
+                        <a href="code.html">
                             <i class='bx bx-cog icon'></i>
-                            <span class="text nav-text">Admin Settings</span>
+                            <span class="text nav-text">Enter Code</span>
                         </a>
                     </li>
                 </ul>
@@ -89,53 +91,32 @@
         </div>
     </nav>
 
-    <section class="home text">
+    <section class="home text menu">
 
-            <div class='project-info'>
-                <h1>Teddy Tracker</h1>
-              </div>
-              <div class='project-tasks'>
-                <div class='project-column'>
-                  <div class='project-column-heading'>
-                    <h2 class='project-column-heading__title'>Tasks By Section</h2><button class='project-column-heading__options'><i class="fas fa-ellipsis-h"></i></button>
-                  </div>
+        <div class='project-info'>
+            <h1>Teddy Tracker</h1>
+        </div>
 
-                    <div class='task' draggable='true'>
-                        <div class='task__tags'>
-                            <span class='task__tag task__tag--current'>Current Task</span>
-                            <div class="dropdown">
-                                <button class='task__options bx bx-dots-horizontal-rounded' 
-                                onclick="toggleDropdown()"></button>
-                                <div class="dropdown-content" id="dropdownContent">
-                                    <!-- Content of the dropdown goes here -->
-                                    <!-- For example, you can include different options for the user -->
-                                    <a href="#"><i class='bx bx-check icon drop'></i> Mark as done</a>
-                                    <a href="#"><i class='bx bx-trash drop' ></i>Delete</a>
-                                    <a href="#"><i class='bx bx-edit drop' ></i>Edit</a>
-                                </div>
-                            </div>
-                        </div>
-                        <p>Subject</p>
-                        <p>Type of Activity</p>
-                        <p>Status</p>
-                        <p>Instructions</p>
-                        <div class='task__stats'>
-                            <span><time datetime="2021-11-24T20:00:00"><i class='bx bx-calendar bx-flip-horizontal icon-task' ></i>Nov 24</time></span>
-                        </div>
+        <div class='project-tasks'>
+            <div class='project-column'>
+                <div class='project-column-heading'>
+                    <span>
+                        <h2 class='project-column-heading__title'>Task by Section</h2>
+                    </span><button class='project-column-heading__options'><i class="fas fa-ellipsis-h"></i></button>
                 </div>
-
 
                 <div class='task' draggable='true'>
                     <div class='task__tags'>
-                        <span class='task__tag task__tag--finished'>Finished Task</span>
+                        <span class='task__tag task__tag--current'>Current Task</span>
                         <div class="dropdown">
-                            <button class='task__options bx bx-dots-horizontal-rounded' 
-                            onclick="toggleDropdown()"></button>
+                            <button class='task__options bx bx-dots-horizontal-rounded'
+                                onclick="toggleDropdown()"></button>
                             <div class="dropdown-content" id="dropdownContent">
                                 <!-- Content of the dropdown goes here -->
                                 <!-- For example, you can include different options for the user -->
-                                <a href="#"><i class='bx bx-trash drop' ></i>Delete</a>
-                                <a href="#"><i class='bx bx-edit drop' ></i>Edit</a>
+                                <a href="#"><i class='bx bx-check icon drop'></i> Mark as done</a>
+                                <a href="#"><i class='bx bx-trash drop'></i>Delete</a>
+                                <a href="#"><i class='bx bx-edit drop'></i>Edit</a>
                             </div>
                         </div>
                     </div>
@@ -144,43 +125,82 @@
                     <p>Status</p>
                     <p>Instructions</p>
                     <div class='task__stats'>
-                        <span><time datetime="2021-11-24T20:00:00"><i class='bx bx-calendar bx-flip-horizontal icon-task' ></i>Nov 24</time></span>
-                    </div>
-            </div>
-
-            <div class='task' draggable='true'>
-                <div class='task__tags'>
-                    <span class='task__tag task__tag--finished'>Finished Task</span>
-                    <div class="dropdown">
-                        <button class='task__options bx bx-dots-horizontal-rounded' 
-                        onclick="toggleDropdown()"></button>
-                        <div class="dropdown-content" id="dropdownContent">
-                            <!-- Content of the dropdown goes here -->
-                            <!-- For example, you can include different options for the user -->
-                            <a href="#"><i class='bx bx-trash drop' ></i>Delete</a>
-                            <a href="#"><i class='bx bx-edit drop' ></i>Edit</a>
-                        </div>
+                        <span><time datetime="2021-11-24T20:00:00"><i
+                                    class='bx bx-calendar bx-flip-horizontal icon-task'></i>Nov 24</time></span>
                     </div>
                 </div>
+
+
+                <div class='task' draggable='true'>
+                    <div class='task__tags'>
+                        <span class='task__tag task__tag--finished'>Finished Task</span>
+                        <div class="dropdown">
+                            <button class='task__options bx bx-dots-horizontal-rounded'
+                                onclick="toggleDropdown()"></button>
+                            <div class="dropdown-content" id="dropdownContent">
+                                <!-- Content of the dropdown goes here -->
+                                <!-- For example, you can include different options for the user -->
+                                <a href="#"><i class='bx bx-trash drop'></i>Delete</a>
+                                <a href="#"><i class='bx bx-edit drop'></i>Edit</a>
+                            </div>
+                        </div>
+                    </div>
                     <p>Subject</p>
                     <p>Type of Activity</p>
                     <p>Status</p>
                     <p>Instructions</p>
-                <div class='task__stats'>
-                    <span><time datetime="2021-11-24T20:00:00"><i class='bx bx-calendar bx-flip-horizontal icon-task' ></i>Nov 24</time></span>
+                    <div class='task__stats'>
+                        <span><time datetime="2021-11-24T20:00:00"><i
+                                    class='bx bx-calendar bx-flip-horizontal icon-task'></i>Nov 24</time></span>
+                    </div>
                 </div>
+
+                <div class='task' draggable='true'>
+                    <div class='task__tags'>
+                        <span class='task__tag task__tag--finished'>Finished Task</span>
+                        <div class="dropdown">
+                            <button class='task__options bx bx-dots-horizontal-rounded'
+                                onclick="toggleDropdown()"></button>
+                            <div class="dropdown-content" id="dropdownContent">
+                                <!-- Content of the dropdown goes here -->
+                                <!-- For example, you can include different options for the user -->
+                                <a href="#"><i class='bx bx-trash drop'></i>Delete</a>
+                                <a href="#"><i class='bx bx-edit drop'></i>Edit</a>
+                            </div>
+                        </div>
+                    </div>
+                    <p>Subject</p>
+                    <p>Type of Activity</p>
+                    <p>Status</p>
+                    <p>Instructions</p>
+                    <div class='task__stats'>
+                        <span><time datetime="2021-11-24T20:00:00"><i
+                                    class='bx bx-calendar bx-flip-horizontal icon-task'></i>Nov 24</time></span>
+                    </div>
+                </div>
+
+            </div>
         </div>
-                          
-                  </div>
-              </div>
-              
 
 
-            
+
+
     </section>
-    
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
 
     <script src="../JS/task.js"></script>
+    <script>
+        // Show SweetAlert2 prompt whenever the page is loaded
+        window.addEventListener('DOMContentLoaded', () => {
+            Swal.fire({
+                title: 'You are viewing as a guest',
+                icon: 'info',
+                confirmButtonText: 'OK'
+            });
+        });
+    </script>
 
 </body>
+
 </html>
