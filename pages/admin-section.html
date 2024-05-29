@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Teddy Tracker</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../css/tasks.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <nav class="sidebar close">
+        <header>
+            <div class="image-text">
+                <span class="image">
+                    <img src="../img/teddyTracker.jpg" alt="logo" class="logo">
+                </span>
+                <div class="text header-text">
+                    <span class="name">Teddy Tracker</span>
+                </div>
+                <i class='bx bx-chevron-right toggle' onclick="toggleSidebar()"></i>
+            </div>
+        </header>
+        <div class="menu-bar">
+            <div class="menu">
+                <ul class="menu-links">
+                    <li class="nav-links">
+                        <a href="#">
+                            <i class='bx bx-task icon'></i>
+                            <span class="text nav-text">All Sections</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="bottom-content">
+                <li class="nav-links">
+                    <a href="#" id="logoutLink" onclick="logout()">
+                        <i class='bx bx-log-out icon'></i>
+                        <span class="text nav-text">Logout</span>
+                    </a>
+                </li>
+                <li class="mode">
+                    <div class="moon-sun">
+                        <i class="bx bx-moon icon moon"></i>
+                        <i class="bx bx-sun icon sun"></i>
+                    </div>
+                    <span class="mode-text text">Dark mode</span>
+                    <div class="toggle-switch">
+                        <span class="switch"></span>
+                    </div>
+                </li>
+            </div>
+        </div>
+    </nav>
+
+    <section class="home text menu">
+        <div class='project-info'>
+            <h1>Sections</h1>
+            <a href="#" class="addTask" onclick="handleAddTask()" style="margin-right: 4vw">
+                <h2>Create Section</h2>
+                <img src="./../assets/Images/utilities/add1.png" alt="add task">
+            </a>
+        </div>
+
+        <!-- Sections will be dynamically inserted here -->
+        <div id="sectionsContainer" class="task-container">
+        </div>
+    </section>
+
+    <!-- Modal Structure -->
+    <div id="addSectionModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Create Section</h2>
+            <form id="createSectionForm">
+                <label for="sectionName">Section Name:</label>
+                <input type="text" id="sectionName" name="sectionName" required>
+                <button type="button" onclick="createSection()">Create</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const host = '192.168.1.3:3000';
+    
+        window.addEventListener('DOMContentLoaded', () => {
+            function getQueryParams() {
+                const params = new URLSearchParams(window.location.search);
+                return {
+                    adminID: params.get('adminID'),
+                    token: params.get('token'),
+                    adminName: params.get('adminName')
+                };
+            }
+    
+            const { adminID, token, adminName } = getQueryParams();
+    
+            if (!adminID || !token) {
+                console.error('Missing adminID or token');
+                alert('Error: Missing admin ID or token.');
+                return;
+            }
+    
+            axios.get(`http://${host}/api/section/${adminID}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            .then(response => {
+                console.log('Sections fetched:', response.data);
+                const sections = response.data;
+                const sectionsContainer = document.getElementById('sectionsContainer');
+    
+                sections.forEach(section => {
+                    const sectionElement = document.createElement('div');
+                    sectionElement.className = 'task';
+                    sectionElement.dataset.id = section.section_id; // Store section ID in data-id attribute
+                    sectionElement.innerHTML = `
+                        <span class='task__tag task__tag--info'>Section</span>
+                        <div class="dropdown" onclick="handleDeleteSection(${section.section_id})">
+                            <img src="./../assets/Images/utilities/delete.png" alt="delete">
+                        </div>
+                        <p>
+                            Section Name: ${section.section_name}
+                        </p>
+                        <p>
+                            PIN: ${section.pin_password}
+                        </p>
+                        <div class='task__stats'>
+                            <span>
+                                <time datetime="${section.created_at}">
+                                    <i class='bx bx-calendar bx-flip-horizontal icon-task'></i>
+                                    ${new Date(section.created_at).toLocaleDateString()}
+                                </time>
+                            </span>
+                        </div>
+                        <a class="task-buttons" href="admin-tasks.html?sectionID=${section.section_id}&adminID=${adminID}&adminName=${adminName}&sectionName=${encodeURIComponent(section.section_name)}" style="text-decoration: none">
+                            <div class='task__tags'>
+                                <button class="view-tasks-button">
+                                    View Tasks
+                                </button>
+                            </div>
+                        </a>
+                    `;
+                    sectionsContainer.appendChild(sectionElement);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching sections:', error);
+            });
+        });
+    
+        function handleAddTask() {
+            const modal = document.getElementById('addSectionModal');
+            modal.style.display = 'block';
+        }
+    
+        function closeModal() {
+            const modal = document.getElementById('addSectionModal');
+            modal.style.display = 'none';
+        }
+    
+        function createSection() {
+            const sectionName = document.getElementById('sectionName').value;
+            const { adminID } = getQueryParams();
+    
+            if (!sectionName) {
+                alert('Please enter a section name.');
+                return;
+            }
+    
+            axios.post(`http://${host}/api/create-section`, {
+                admin_id: adminID,
+                section_name: sectionName
+            })
+            .then(response => {
+                console.log('Section created:', response.data);
+                closeModal();
+                window.location.reload();
+            })
+            .catch(error => {
+                console.error('Error creating section:', error);
+                alert('Error creating section. Please try again.');
+            });
+        }
+    
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                adminID: params.get('adminID'),
+                token: params.get('token'),
+                adminName: params.get('adminName')
+            };
+        }
+    
+        function handleDeleteSection(section_id) {
+            console.log('Section ID:', section_id);
+            axios.post(`http://${host}/api/section/${section_id}`)
+            .then(response => {
+                console.log('Section deleted successfully:', response.data.message);
+                window.location.reload();
+            })
+            .catch(error => {
+                console.error('Error deleting section:', error);
+                // Handle error scenarios here, such as displaying an error message to the user
+            });
+        }
+        function toggleSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            sidebar.classList.toggle('close');
+        }
+    
+        function logout() {
+            const { adminID, token } = getQueryParams();
+    
+            axios.post(`http://${host}/api/logout`, {
+                admin_id: adminID
+            }, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            .then(response => {
+                console.log('Logout successful:', response.data.message);
+                // Redirect to the login page or perform any other actions after logout
+                window.location.href = '../index.html';
+            })
+            .catch(error => {
+                console.error('Error logging out:', error);
+                alert('Error logging out. Please try again.');
+            });
+        }
+    </script>
+    
+</body>
+</html>
+
+
+

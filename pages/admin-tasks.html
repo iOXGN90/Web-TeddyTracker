@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teddy Tracker</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../css/tasks.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+        }
+
+        .form-actions {
+            text-align: right;
+        }
+
+        .form-actions button {
+            padding: 10px 20px;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="sidebar close">
+        <header>
+            <div class="image-text">
+                <span class="image">
+                    <img src="../img/teddyTracker.jpg" alt="logo" class="logo">
+                </span>
+                <div class="text header-text">
+                    <span class="name">Teddy Tracker</span>
+                </div>
+                <i class='bx bx-chevron-right toggle'></i>
+            </div>
+        </header>
+    
+        <div class="menu-bar">
+            <div class="menu">
+                <ul class="menu-links">
+                    <li class="nav-links">
+                        <a href="#">
+                            <i class='bx bx-task icon'></i>
+                            <span class="text nav-text">All Tasks</span>
+                        </a>
+                    </li>
+                    <li class="nav-links">
+                        <a href="#">
+                            <i class='bx bx-comment-check icon'></i>
+                            <span class="text nav-text">Finished Tasks</span>
+                        </a>
+                    </li>
+                    <li class="nav-links">
+                        <a href="#">
+                            <i class='bx bx-comment-detail icon'></i>
+                            <span class="text nav-text">Task by Section</span>
+                        </a>
+                    </li>
+                    <li class="nav-links">
+                        <a href="#">
+                            <i class='bx bx-notepad icon'></i>
+                            <span class="text nav-text">Admin Notes</span>
+                        </a>
+                    </li>
+                    <li class="nav-links">
+                        <a href="#">
+                            <i class='bx bx-cog icon'></i>
+                            <span class="text nav-text">Enter Code</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+    
+            <div class="bottom-content">
+                <li class="nav-links">
+                    <a href="../index.html" id="logoutLink">
+                        <i class='bx bx-log-out icon'></i>
+                        <span class="text nav-text">Logout</span>
+                    </a>
+                </li>
+    
+                <li class="mode">
+                    <div class="moon-sun">
+                        <i class="bx bx-moon icon moon"></i>
+                        <i class="bx bx-sun icon sun"></i>
+                    </div>
+                    <span class="mode-text text">Dark mode</span>
+                    <div class="toggle-switch">
+                        <span class="switch"></span>
+                    </div>
+                </li>
+            </div>
+        </div>
+    </nav>
+
+    <section class="home text menu">
+        <div class='project-info'>
+            <h1>Sections</h1>
+            <h2 id="sectionName"></h2> <!-- Display sectionName here -->
+            <a href="#" class="addTask" onclick="openModal()" style="margin-right: 4vw">
+                <h2>Create Task</h2>
+                <img src="./../assets/Images/utilities/add1.png" alt="add task">
+            </a>
+        </div>
+
+        <div class='project-tasks'>
+            <div class='project-column'>
+                <div class='project-column-heading'>
+                    <span>
+                        <h2 class='project-column-heading__title'>All Tasks</h2>
+                    </span>
+                    <button class='project-column-heading__options'><i class="fas fa-ellipsis-h"></i></button>
+                </div>
+                <!-- Tasks will be dynamically inserted here -->
+                <div id="tasksContainer" class="task-container"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal HTML -->
+    <div id="taskModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Create Task</h2>
+            <div class="form-group">
+                <label for="subject">Subject:</label>
+                <input type="text" id="subject" name="subject">
+            </div>
+            <div class="form-group">
+                <label for="taskType">Type of Task:</label>
+                <select id="taskType" name="taskType">
+                    <option value="Assignment">Assignment</option>
+                    <option value="Activity">Activity</option>
+                    <option value="Exam">Exam</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="taskTitle">Task Title:</label>
+                <input type="text" id="taskTitle" name="taskTitle">
+            </div>
+            <div class="form-group">
+                <label for="taskDeadline">Task Deadline:</label>
+                <input type="date" id="taskDeadline" name="taskDeadline">
+            </div>
+            <div class="form-group">
+                <label for="taskInstruction">Task Instruction:</label>
+                <textarea id="taskInstruction" name="taskInstruction"></textarea>
+            </div>
+            <div class="form-actions">
+                <button onclick="closeModal()">Cancel</button>
+                <button onclick="createTask()">Create Task</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const host = '192.168.1.3:3000';
+    
+        function truncateText(text, maxLength) {
+            if (text.length > maxLength) {
+                return text.substring(0, maxLength) + '...';
+            }
+            return text;
+        }
+        
+        function fetchTasks() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const sectionID = urlParams.get('sectionID'); // Use sectionID as in the href from admin-section.html
+        
+            if (!sectionID) {
+                console.error('Missing sectionID');
+                alert('Error: Missing section ID.');
+                return;
+            }
+        
+            axios.get(`http://${host}/api/tasks/${sectionID}`)
+                .then(response => {
+                    console.log('Tasks fetched:', response.data);
+                    const tasks = response.data.data;
+                    const tasksContainer = document.getElementById('tasksContainer');
+                    tasksContainer.innerHTML = ''; // Clear existing tasks
+                    tasks.forEach(task => {
+                        const taskElement = document.createElement('div');
+                        taskElement.className = 'task';
+                        taskElement.draggable = true;
+                        taskElement.innerHTML = `
+                            <div class='task__tags'>
+                                <span class='task__tag task__tag--${task.status.toUpperCase()}'>${task.status} Task</span>
+                                <div class="dropdown"> 
+                                    <button class='task__options bx bx-dots-horizontal-rounded' onclick="toggleDropdown()"></button>
+                                    <div class="dropdown-content">
+                                        <a href="#"><i class='bx bx-check icon drop'></i> Mark as done</a>
+                                        <a href="#"><i class='bx bx-trash drop'></i>Delete</a>
+                                        <a href="#"><i class='bx bx-edit drop'></i>Edit</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <p>Subject: ${task.subject}</p>
+                            <p>Task Title: ${task.task_title}</p>
+                            <p>Deadline: ${task.task_deadline}</p>
+                            <p>Instruction: ${truncateText(task.task_instruction, 20)}</p>
+                            <p>Type of Task: ${task.type_of_task}</p>
+                            <div class='task__stats'>
+                                <span>
+                                    <time datetime="${task.created_at}">
+                                        <i class='bx bx-calendar bx-flip-horizontal icon-task'></i>
+                                        ${new Date(task.created_at).toLocaleDateString()}
+                                    </time>
+                                </span>
+                            </div>
+                        `;
+                        tasksContainer.appendChild(taskElement);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching tasks:', error);
+                    alert('Error fetching tasks. Please try again.');
+                });
+        }
+    
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const adminName = urlParams.get('adminName');
+            const sectionID = urlParams.get('sectionID');
+            const adminID = urlParams.get('adminID');
+            const sectionName = urlParams.get('sectionName');
+    
+            console.log('Admin Name:', adminName);
+            console.log('Section ID:', sectionID);
+            console.log('Admin ID:', adminID);
+            console.log('Section Name:', sectionName);
+    
+            if (!adminID || !sectionID || !sectionName) {
+                console.error('Missing adminID, sectionID, or sectionName');
+                alert('Error: Missing admin ID, section ID, or section Name.');
+                return;
+            }
+    
+            // Update the sectionName display
+            document.getElementById('sectionName').textContent = sectionName;
+    
+            fetchTasks();
+        });
+    
+        function openModal() {
+            document.getElementById('taskModal').style.display = 'block';
+        }
+    
+        function closeModal() {
+            document.getElementById('taskModal').style.display = 'none';
+        }
+    
+        function createTask() {
+            const subject = document.getElementById('subject').value;
+            const taskTitle = document.getElementById('taskTitle').value;
+            const taskDeadline = document.getElementById('taskDeadline').value;
+            const taskInstruction = document.getElementById('taskInstruction').value;
+            const taskType = document.getElementById('taskType').value;
+            const urlParams = new URLSearchParams(window.location.search);
+            const adminID = urlParams.get('adminID');
+            const sectionID = urlParams.get('sectionID');
+    
+            if (!subject || !taskTitle || !taskDeadline || !taskInstruction || !taskType) {
+                alert('Please fill in all fields.');
+                return;
+            }
+    
+            axios.post(`http://${host}/api/create-task`, {
+                admin_id: adminID,
+                section_id: sectionID,
+                subject: subject,
+                task_title: taskTitle,
+                task_deadline: taskDeadline,
+                task_instruction: taskInstruction,
+                type_of_task: taskType
+            })
+            .then(response => {
+                console.log('Task created:', response.data);
+                closeModal();
+                fetchTasks(); // Fetch tasks again to update the list
+            })
+            .catch(error => {
+                console.error('Error creating task:', error);
+                alert('Error creating task. Please try again.');
+            });
+        }
+    
+        function toggleDropdown() {
+            // Your dropdown toggle logic here
+        }
+    </script>
+    
+</body>
+</html>

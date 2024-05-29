@@ -1,73 +1,47 @@
+body {
+    font-family: Arial, sans-serif;
 
-:root{
-
-
-    /* transition */
-    --tran-02: all 0.2s ease;
-    --tran-03: all 0.3s ease;
-    --tran-04: all 0.4s ease;
-    --tran-05: all 0.5s ease;
-}
-
-
-
-.middle {
-    width: 100%;
-    align-content: center;
+    display: flex;
     justify-content: center;
+    align-items: center;
+    height: 100vh;
+    box-sizing: border-box;
 }
-.mode{
+
+.container {
+    max-width: 1536px;
     width: 100%;
-    height: 20%;
-    align-content: center;
-    justify-content: center;
-    text-align: center;
 }
-.mode-enter{
+
+.center{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo{
+    width: 200px;
+}
+
+.choose{
     display: flex;
     flex-direction: column;
 }
 
-.mode-enter a{
+.text1 {
+    font-size: 50px;
+    color: #55bCF6;
+}
+
+
+.text2 {
+    font-size: 20px;
+    color: #fff;
+}
+a {
+    background-color: #55bCF6;
+    border-radius: 100px;
+    padding: 10px;
+    margin-bottom: 10px;
     text-decoration: none;
-    color: white;
-}
-
-.popup{
-    background-color: #fffabd;
-    width: 10vw;
-    padding: 5vh;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 3%;
-    visibility: hidden;
-}
-
-.open-popup{
-    visibility: visible;
-}
-
-.popup form{
-    display: flex;
-    flex-direction: column;
-    /* border-radius: 100%; */
-}
-.popup form label{
-    display: flex;
-    flex-direction: column;
-    color: #707070;
-    height: 30px;
-}
-#login-button{
-    transition-timing-function: ease-in-out;
-    transition: width 5s;
-    margin-top: 3vh;
-    box-shadow: 0 3px 3px gray;
-
-}
-
-#login-button:hover{
-
 }
