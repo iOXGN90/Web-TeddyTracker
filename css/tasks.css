@@ -420,16 +420,48 @@ h1 {
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
+  height: 180px;
   max-width: 500px;
   border-radius: 15px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
+#createSectionForm {
+  font-size: 22px;
+}
+#sectionName{
+    height: 40px;
+    width: 260px;
+    margin-top: 20px;
+    border-radius: 10px;
+    border-width: 0.5px;
+    padding: 10px;
+  }
+
+.modal-content .button{
+  width: 100%;
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.createButton{
+  width: 100px;
+  font-size: 22px;
+  font-weight: bold;
+  border-radius: 10px;
+  border-width: 0.5px;
+}
+.createButton:hover{
+  background-color: #feef4c;
+}
+
 .close {
   color: #aaa;
   float: right;
   font-size: 28px;
   font-weight: bold;
 }
+
 .close:hover,
 .close:focus {
   color: black;
@@ -459,9 +491,14 @@ h1 {
 }
 .task__tag {
   border-radius: 100px;
-  padding: 2px 13px;
-  font-size: 12px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 16px;
 }
+.view-tasks-button{
+  padding: 10px;
+}
+
 .task__tag--current {
   color: var(--tag-4-text);
   background-color: var(--tag-4);
@@ -477,7 +514,7 @@ h1 {
 .task__tags {
   width: 100%;
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   justify-content: space-between;
 }
 .task__options {
@@ -520,6 +557,9 @@ h1 {
   height: 100%;
   vertical-align: top;
   padding: 3rem 2rem;
+}
+.task-buttons{
+  margin-top: 10px;
 }
 
 .tag-progress {
@@ -670,6 +710,7 @@ h1 {
 }
 
 .dropdown {
+  margin-left: 100px;
   position: relative;
   display: inline-block;
 }
@@ -766,6 +807,11 @@ h1, h2 {
 
 .input:focus + .highlight {
   width: 100%;
+}
+
+.right{
+  display: flex;
+  flex-direction: row;
 }
 
 
