@@ -491,12 +491,16 @@ h1 {
 }
 .task__tag {
   border-radius: 100px;
-  text-align: center;
   font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 16px;
 }
 .view-tasks-button{
+
   padding: 10px;
+
 }
 
 .task__tag--current {
@@ -514,8 +518,14 @@ h1 {
 .task__tags {
   width: 100%;
   display: flex;
-  /* align-items: center; */
+  justify-content: center;
+  align-items: center;
+}
+.task_task__tags{
+  width: 100%;
+  display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .task__options {
   background: transparent;
@@ -559,7 +569,7 @@ h1 {
   padding: 3rem 2rem;
 }
 .task-buttons{
-  margin-top: 10px;
+  margin-top: 100px;
 }
 
 .tag-progress {
@@ -709,10 +719,17 @@ h1 {
   background-color: grey;
 }
 
+.upper{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .dropdown {
-  margin-left: 100px;
-  position: relative;
-  display: inline-block;
+  display: flex;
+  width: 20%;
+  align-items: center;
+  justify-content: end;
 }
 .dropdown img{
   width: 20px;

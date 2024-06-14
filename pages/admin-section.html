@@ -88,6 +88,7 @@
         </div>
     </div>
 
+
     <script>
         const host = '192.168.1.7:3000';
     
@@ -124,11 +125,13 @@
                     sectionElement.className = 'task';
                     sectionElement.dataset.id = section.section_id; // Store section ID in data-id attribute
                     sectionElement.innerHTML = `
-                        <span class='task__tag task__tag--info'>
-                            Section: ${section.section_name}
-                        </span>
-                        <div class="dropdown" onclick="handleDeleteSection(${section.section_id})">
-                            <img src="./../assets/Images/utilities/delete.png" alt="delete">
+                        <div class="upper">
+                            <span class='task__tag task__tag--info'>
+                                Section: ${section.section_name}
+                            </span>
+                            <div class="dropdown" onclick="handleDeleteSection(${section.section_id})">
+                                <img src="./../assets/Images/utilities/delete.png" alt="delete">
+                            </div>
                         </div>
                         <p>
                             PIN: ${section.pin_password}
@@ -212,7 +215,7 @@
                 // Handle error scenarios here, such as displaying an error message to the user
             });
         }
-        
+
         function toggleSidebar() {
             const sidebar = document.querySelector('.sidebar');
             sidebar.classList.toggle('close');
